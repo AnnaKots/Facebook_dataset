@@ -1,0 +1,1650 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Facebook}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Анализ датасета
+Facebook}\label{ux430ux43dux430ux43bux438ux437-ux434ux430ux442ux430ux441ux435ux442ux430-facebook}
+
+\subsection{Описание Facebook metrics Data
+Set:}\label{ux43eux43fux438ux441ux430ux43dux438ux435-facebook-metrics-data-set}
+
+\paragraph{(ссылка:
+https://archive.ics.uci.edu/ml/datasets/Facebook+metrics)}\label{ux441ux441ux44bux43bux43aux430-httpsarchive.ics.uci.edumldatasetsfacebookmetrics}
+
+Данные связаны с публикациями, опубликованными в течение 2014 года на
+странице известного косметического бренда в Facebook. Этот набор данных
+содержит 500 строк объектов и 19 атрибутов. Из них 7 фич, известных до
+публикации поста, и 12 фич для оценки показателей поста Пропущенные
+значения имеют вид NaN
+
+    \subsection{ХАРАКТЕРИСТИКИ(пояснения):}\label{ux445ux430ux440ux430ux43aux442ux435ux440ux438ux441ux442ux438ux43aux438ux43fux43eux44fux441ux43dux435ux43dux438ux44f}
+
+\textbf{Page total likes}: число людей, лайкавших страницу
+\textbf{Type}: тип контента Link(ссылка), Photo(фото), Status(статус),
+Video(видео). \textbf{Category}: 1-action(акция), 2-product(товар),
+3-inspiration(неявная связь с брендом) \textbf{Post Month}: месяц
+публикации(1-Январь...12-Декабрь) \textbf{Post Weekday}: неделя
+публикации (1-Sunday,7-Saturday) \textbf{Post Hour}: час
+публикации(0-23) \textbf{Paid}: если компания платила Facebook за
+рекламу (0-нет, 1-да) \textbf{Lifetime Post Total Reach}: число людей,
+которые видели публикацию (уникальные пользователи). \textbf{Lifetime
+Post Total Impressions}: показы - это число раз, когда отображается
+сообщение со страницы, независимо от того, щелкнуто оно или нет. Люди
+могут видеть несколько показов одного и того же сообщения. Например,
+кто-то может увидеть обновление страницы в Ленте Новостей один раз, а
+затем второй раз, если друг делится им. \textbf{Lifetime Engaged Users}:
+число людей, щелкнувших в любом месте поста (уникальные пользователи).
+\textbf{Lifetime Post Consumers}: число людей, щелкнувших в любом месте
+поста. \textbf{Lifetime Post Consumptions}: число кликов в любом месте
+поста. \textbf{Lifetime Post Impressions by people who have liked a
+Page}: общее число показов поста только людям, которые лайкали страницу.
+\textbf{Lifetime Post reach by people who like a Page}: число людей,
+которые видели пост, потому что они лайкали эту страницу (уникальные
+пользователи). \textbf{Lifetime People who have liked a Page and engaged
+with a post}: число людей, которые лайкали страницу и которые нажали в
+любом месте поста (уникальные пользователи). \textbf{comment}: число
+комментариев \textbf{like}: число лайков \textbf{share}: число людей,
+поделившихся записью \textbf{Total Interactions}:
+'comment'+'like'+'share' - всего взаимодейтсвий
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k+kn}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{IPython.display} \PY{k+kn}{import} \PY{n}{HTML}\PY{p}{,} \PY{n}{display}
+        \PY{k+kn}{import} \PY{n+nn}{tabulate}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k+kn}{as} \PY{n+nn}{sns}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{style}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ticks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{n}{data}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C:/Users/kotsi/Downloads/dataset\PYZus{}Facebook.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Paid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{Paid}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bool}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1}]:}    Page total likes    Type  Category  Post Month  Post Weekday  Post Hour  \textbackslash{}
+        0            139441   Photo         2          12             4          3   
+        1            139441  Status         2          12             3         10   
+        2            139441   Photo         3          12             3          3   
+        3            139441   Photo         2          12             2         10   
+        4            139441   Photo         2          12             2          3   
+        
+            Paid  Lifetime Post Total Reach  Lifetime Post Total Impressions  \textbackslash{}
+        0  False                       2752                             5091   
+        1  False                      10460                            19057   
+        2  False                       2413                             4373   
+        3   True                      50128                            87991   
+        4  False                       7244                            13594   
+        
+           Lifetime Engaged Users  Lifetime Post Consumers  \textbackslash{}
+        0                     178                      109   
+        1                    1457                     1361   
+        2                     177                      113   
+        3                    2211                      790   
+        4                     671                      410   
+        
+           Lifetime Post Consumptions  \textbackslash{}
+        0                         159   
+        1                        1674   
+        2                         154   
+        3                        1119   
+        4                         580   
+        
+           Lifetime Post Impressions by people who have liked your Page  \textbackslash{}
+        0                                               3078              
+        1                                              11710              
+        2                                               2812              
+        3                                              61027              
+        4                                               6228              
+        
+           Lifetime Post reach by people who like your Page  \textbackslash{}
+        0                                              1640   
+        1                                              6112   
+        2                                              1503   
+        3                                             32048   
+        4                                              3200   
+        
+           Lifetime People who have liked your Page and engaged with your post  \textbackslash{}
+        0                                                119                     
+        1                                               1108                     
+        2                                                132                     
+        3                                               1386                     
+        4                                                396                     
+        
+           comment    like  share  Total Interactions  
+        0        4    79.0   17.0                 100  
+        1        5   130.0   29.0                 164  
+        2        0    66.0   14.0                  80  
+        3       58  1572.0  147.0                1777  
+        4       19   325.0   49.0                 393  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{data}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}        Page total likes    Category  Post Month  Post Weekday   Post Hour  \textbackslash{}
+        count        500.000000  500.000000  500.000000    500.000000  500.000000   
+        mean      123194.176000    1.880000    7.038000      4.150000    7.840000   
+        std        16272.813214    0.852675    3.307936      2.030701    4.368589   
+        min        81370.000000    1.000000    1.000000      1.000000    1.000000   
+        25\%       112676.000000    1.000000    4.000000      2.000000    3.000000   
+        50\%       129600.000000    2.000000    7.000000      4.000000    9.000000   
+        75\%       136393.000000    3.000000   10.000000      6.000000   11.000000   
+        max       139441.000000    3.000000   12.000000      7.000000   23.000000   
+        
+               Lifetime Post Total Reach  Lifetime Post Total Impressions  \textbackslash{}
+        count                  500.00000                     5.000000e+02   
+        mean                 13903.36000                     2.958595e+04   
+        std                  22740.78789                     7.680325e+04   
+        min                    238.00000                     5.700000e+02   
+        25\%                   3315.00000                     5.694750e+03   
+        50\%                   5281.00000                     9.051000e+03   
+        75\%                  13168.00000                     2.208550e+04   
+        max                 180480.00000                     1.110282e+06   
+        
+               Lifetime Engaged Users  Lifetime Post Consumers  \textbackslash{}
+        count              500.000000               500.000000   
+        mean               920.344000               798.772000   
+        std                985.016636               882.505013   
+        min                  9.000000                 9.000000   
+        25\%                393.750000               332.500000   
+        50\%                625.500000               551.500000   
+        75\%               1062.000000               955.500000   
+        max              11452.000000             11328.000000   
+        
+               Lifetime Post Consumptions  \textbackslash{}
+        count                  500.000000   
+        mean                  1415.130000   
+        std                   2000.594118   
+        min                      9.000000   
+        25\%                    509.250000   
+        50\%                    851.000000   
+        75\%                   1463.000000   
+        max                  19779.000000   
+        
+               Lifetime Post Impressions by people who have liked your Page  \textbackslash{}
+        count                                       5.000000e+02              
+        mean                                        1.676638e+04              
+        std                                         5.979102e+04              
+        min                                         5.670000e+02              
+        25\%                                         3.969750e+03              
+        50\%                                         6.255500e+03              
+        75\%                                         1.486050e+04              
+        max                                         1.107833e+06              
+        
+               Lifetime Post reach by people who like your Page  \textbackslash{}
+        count                                        500.000000   
+        mean                                        6585.488000   
+        std                                         7682.009405   
+        min                                          236.000000   
+        25\%                                         2181.500000   
+        50\%                                         3417.000000   
+        75\%                                         7989.000000   
+        max                                        51456.000000   
+        
+               Lifetime People who have liked your Page and engaged with your post  \textbackslash{}
+        count                                         500.000000                     
+        mean                                          609.986000                     
+        std                                           612.725618                     
+        min                                             9.000000                     
+        25\%                                           291.000000                     
+        50\%                                           412.000000                     
+        75\%                                           656.250000                     
+        max                                          4376.000000                     
+        
+                 comment         like       share  Total Interactions  
+        count  500.00000   499.000000  496.000000          500.000000  
+        mean     7.48200   177.945892   27.266129          212.120000  
+        std     21.18091   323.398742   42.613292          380.233118  
+        min      0.00000     0.000000    0.000000            0.000000  
+        25\%      1.00000    56.500000   10.000000           71.000000  
+        50\%      3.00000   101.000000   19.000000          123.500000  
+        75\%      7.00000   187.500000   32.250000          228.500000  
+        max    372.00000  5172.000000  790.000000         6334.000000  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{data}\PY{o}{.}\PY{n}{dtypes}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} Page total likes                                                         int64
+        Type                                                                    object
+        Category                                                                 int64
+        Post Month                                                               int64
+        Post Weekday                                                             int64
+        Post Hour                                                                int64
+        Paid                                                                      bool
+        Lifetime Post Total Reach                                                int64
+        Lifetime Post Total Impressions                                          int64
+        Lifetime Engaged Users                                                   int64
+        Lifetime Post Consumers                                                  int64
+        Lifetime Post Consumptions                                               int64
+        Lifetime Post Impressions by people who have liked your Page             int64
+        Lifetime Post reach by people who like your Page                         int64
+        Lifetime People who have liked your Page and engaged with your post      int64
+        comment                                                                  int64
+        like                                                                   float64
+        share                                                                  float64
+        Total Interactions                                                       int64
+        dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}201}]:} \PY{c+c1}{\PYZsh{} Для этих стобцов нам бесполезно считать среднее, максимальное и минимальное}
+          \PY{n}{categorical\PYZus{}columns}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Category}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Post Month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Post Weekday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Post Hour}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Paid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]} \PY{c+c1}{\PYZsh{}мода, медиана}
+          
+          \PY{n}{numerical\PYZus{}columns}\PY{o}{=}\PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Category}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Post Month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Post Weekday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Post Hour}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Paid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          
+          \PY{k}{def} \PY{n+nf}{static\PYZus{}counted}\PY{p}{(}\PY{n}{columns}\PY{p}{)}\PY{p}{:}
+              \PY{n}{measures}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{p}{)}
+              \PY{n}{measures}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0\PYZus{}mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{columns}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+              \PY{n}{measures}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1\PYZus{}max}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{columns}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}
+              \PY{n}{measures}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2\PYZus{}min}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{columns}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}
+              \PY{n}{measures}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3\PYZus{}median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{columns}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}
+              \PY{n}{measures}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{measures}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+              \PY{k}{return} \PY{n}{measures}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}202}]:} \PY{c+c1}{\PYZsh{} Мода}
+          \PY{n}{categorical\PYZus{}columns}\PY{o}{.}\PY{n}{mode}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}202}]:}     Type  Category  Post Month  Post Weekday  Post Hour   Paid
+          0  Photo         1          10             7          3  False
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}203}]:} \PY{n}{static\PYZus{}counted}\PY{p}{(}\PY{n}{numerical\PYZus{}columns}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}203}]:}          Lifetime Engaged Users  \textbackslash{}
+          0\_mean                  920.344   
+          1\_max                     11452   
+          2\_min                         9   
+          3\_median                  625.5   
+          
+                   Lifetime People who have liked your Page and engaged with your post  \textbackslash{}
+          0\_mean                                              609.986                    
+          1\_max                                                  4376                    
+          2\_min                                                     9                    
+          3\_median                                                412                    
+          
+                   Lifetime Post Consumers Lifetime Post Consumptions  \textbackslash{}
+          0\_mean                   798.772                    1415.13   
+          1\_max                      11328                      19779   
+          2\_min                          9                          9   
+          3\_median                   551.5                        851   
+          
+                   Lifetime Post Impressions by people who have liked your Page  \textbackslash{}
+          0\_mean                                              16766.4             
+          1\_max                                               1107833             
+          2\_min                                                   567             
+          3\_median                                             6255.5             
+          
+                   Lifetime Post Total Impressions Lifetime Post Total Reach  \textbackslash{}
+          0\_mean                           29585.9                   13903.4   
+          1\_max                            1110282                    180480   
+          2\_min                                570                       238   
+          3\_median                            9051                      5281   
+          
+                   Lifetime Post reach by people who like your Page Page total likes  \textbackslash{}
+          0\_mean                                            6585.49           123194   
+          1\_max                                               51456           139441   
+          2\_min                                                 236            81370   
+          3\_median                                             3417           129600   
+          
+                   Total Interactions   Type comment     like    share  
+          0\_mean               212.12    NaN   7.482  177.946  27.2661  
+          1\_max                  6334  Video     372     5172      790  
+          2\_min                     0   Link       0        0        0  
+          3\_median              123.5    NaN       3      101       19  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}204}]:} \PY{n}{numerical\PYZus{}columns}\PY{o}{.}\PY{n}{mode}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}204}]:}                                                         0     1     2     3   \textbackslash{}
+          Page total likes                                    136393   NaN   NaN   NaN   
+          Type                                                 Photo   NaN   NaN   NaN   
+          Lifetime Post Total Reach                              677  2232  2645  2938   
+          Lifetime Post Total Impressions                       4372  6503  7004  8533   
+          Lifetime Engaged Users                                 537   NaN   NaN   NaN   
+          Lifetime Post Consumers                                182   298   319   322   
+          Lifetime Post Consumptions                             431   513   599   652   
+          Lifetime Post Impressions by people who have li{\ldots}    1210  1284  2541  2888   
+          Lifetime Post reach by people who like your Page       690   704  1228  1640   
+          Lifetime People who have liked your Page and en{\ldots}     403   NaN   NaN   NaN   
+          comment                                                  0   NaN   NaN   NaN   
+          like                                                    98   NaN   NaN   NaN   
+          share                                                   13    14   NaN   NaN   
+          Total Interactions                                       0    39    75   NaN   
+          
+                                                                4      5     6     7   \textbackslash{}
+          Page total likes                                     NaN    NaN   NaN   NaN   
+          Type                                                 NaN    NaN   NaN   NaN   
+          Lifetime Post Total Reach                           3322   3358  3414  3528   
+          Lifetime Post Total Impressions                     8745  12735   NaN   NaN   
+          Lifetime Engaged Users                               NaN    NaN   NaN   NaN   
+          Lifetime Post Consumers                              335    374   482   503   
+          Lifetime Post Consumptions                           719    730   795   889   
+          Lifetime Post Impressions by people who have li{\ldots}  3675   4911  4935  5010   
+          Lifetime Post reach by people who like your Page    1674   1722  2044  2124   
+          Lifetime People who have liked your Page and en{\ldots}   NaN    NaN   NaN   NaN   
+          comment                                              NaN    NaN   NaN   NaN   
+          like                                                 NaN    NaN   NaN   NaN   
+          share                                                NaN    NaN   NaN   NaN   
+          Total Interactions                                   NaN    NaN   NaN   NaN   
+          
+                                                                8     9   {\ldots}      21  \textbackslash{}
+          Page total likes                                     NaN   NaN  {\ldots}     NaN   
+          Type                                                 NaN   NaN  {\ldots}     NaN   
+          Lifetime Post Total Reach                           3754  5280  {\ldots}     NaN   
+          Lifetime Post Total Impressions                      NaN   NaN  {\ldots}     NaN   
+          Lifetime Engaged Users                               NaN   NaN  {\ldots}     NaN   
+          Lifetime Post Consumers                              513   642  {\ldots}     NaN   
+          Lifetime Post Consumptions                           NaN   NaN  {\ldots}     NaN   
+          Lifetime Post Impressions by people who have li{\ldots}  5732   NaN  {\ldots}     NaN   
+          Lifetime Post reach by people who like your Page    2162  2174  {\ldots}    3230   
+          Lifetime People who have liked your Page and en{\ldots}   NaN   NaN  {\ldots}     NaN   
+          comment                                              NaN   NaN  {\ldots}     NaN   
+          like                                                 NaN   NaN  {\ldots}     NaN   
+          share                                                NaN   NaN  {\ldots}     NaN   
+          Total Interactions                                   NaN   NaN  {\ldots}     NaN   
+          
+                                                                22    23    24    25  \textbackslash{}
+          Page total likes                                     NaN   NaN   NaN   NaN   
+          Type                                                 NaN   NaN   NaN   NaN   
+          Lifetime Post Total Reach                            NaN   NaN   NaN   NaN   
+          Lifetime Post Total Impressions                      NaN   NaN   NaN   NaN   
+          Lifetime Engaged Users                               NaN   NaN   NaN   NaN   
+          Lifetime Post Consumers                              NaN   NaN   NaN   NaN   
+          Lifetime Post Consumptions                           NaN   NaN   NaN   NaN   
+          Lifetime Post Impressions by people who have li{\ldots}   NaN   NaN   NaN   NaN   
+          Lifetime Post reach by people who like your Page    3298  3768  5348  5372   
+          Lifetime People who have liked your Page and en{\ldots}   NaN   NaN   NaN   NaN   
+          comment                                              NaN   NaN   NaN   NaN   
+          like                                                 NaN   NaN   NaN   NaN   
+          share                                                NaN   NaN   NaN   NaN   
+          Total Interactions                                   NaN   NaN   NaN   NaN   
+          
+                                                                26    27    28    29  \textbackslash{}
+          Page total likes                                     NaN   NaN   NaN   NaN   
+          Type                                                 NaN   NaN   NaN   NaN   
+          Lifetime Post Total Reach                            NaN   NaN   NaN   NaN   
+          Lifetime Post Total Impressions                      NaN   NaN   NaN   NaN   
+          Lifetime Engaged Users                               NaN   NaN   NaN   NaN   
+          Lifetime Post Consumers                              NaN   NaN   NaN   NaN   
+          Lifetime Post Consumptions                           NaN   NaN   NaN   NaN   
+          Lifetime Post Impressions by people who have li{\ldots}   NaN   NaN   NaN   NaN   
+          Lifetime Post reach by people who like your Page    7020  7800  8032  8120   
+          Lifetime People who have liked your Page and en{\ldots}   NaN   NaN   NaN   NaN   
+          comment                                              NaN   NaN   NaN   NaN   
+          like                                                 NaN   NaN   NaN   NaN   
+          share                                                NaN   NaN   NaN   NaN   
+          Total Interactions                                   NaN   NaN   NaN   NaN   
+          
+                                                                 30  
+          Page total likes                                      NaN  
+          Type                                                  NaN  
+          Lifetime Post Total Reach                             NaN  
+          Lifetime Post Total Impressions                       NaN  
+          Lifetime Engaged Users                                NaN  
+          Lifetime Post Consumers                               NaN  
+          Lifetime Post Consumptions                            NaN  
+          Lifetime Post Impressions by people who have li{\ldots}    NaN  
+          Lifetime Post reach by people who like your Page    20608  
+          Lifetime People who have liked your Page and en{\ldots}    NaN  
+          comment                                               NaN  
+          like                                                  NaN  
+          share                                                 NaN  
+          Total Interactions                                    NaN  
+          
+          [14 rows x 31 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}205}]:} \PY{n}{types}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{types}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}205}]:} ['Photo', 'Status', 'Link', 'Video']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}206}]:} \PY{n}{un\PYZus{}photos}\PY{o}{=}\PY{n}{categorical\PYZus{}columns}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{categorical\PYZus{}columns}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{!=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Photo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          \PY{n}{photos}\PY{o}{=}\PY{n}{numerical\PYZus{}columns}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{numerical\PYZus{}columns}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{!=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Photo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          \PY{n}{un\PYZus{}statuses}\PY{o}{=}\PY{n}{categorical\PYZus{}columns}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{categorical\PYZus{}columns}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{!=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          \PY{n}{statuses}\PY{o}{=}\PY{n}{numerical\PYZus{}columns}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{numerical\PYZus{}columns}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{!=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          \PY{n}{un\PYZus{}linkes}\PY{o}{=}\PY{n}{categorical\PYZus{}columns}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{categorical\PYZus{}columns}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{!=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Link}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          \PY{n}{linkes}\PY{o}{=}\PY{n}{numerical\PYZus{}columns}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{numerical\PYZus{}columns}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{!=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Link}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          \PY{n}{un\PYZus{}videos}\PY{o}{=}\PY{n}{categorical\PYZus{}columns}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{categorical\PYZus{}columns}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{!=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Video}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          \PY{n}{videos}\PY{o}{=}\PY{n}{numerical\PYZus{}columns}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{numerical\PYZus{}columns}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{!=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Video}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{un\PYZus{}arr}\PY{o}{=}\PY{p}{[}\PY{n}{un\PYZus{}photos}\PY{p}{,} \PY{n}{un\PYZus{}statuses}\PY{p}{,} \PY{n}{un\PYZus{}linkes}\PY{p}{,} \PY{n}{un\PYZus{}videos}\PY{p}{]}
+          \PY{n}{arr}\PY{o}{=}\PY{p}{[}\PY{n}{photos}\PY{p}{,} \PY{n}{statuses}\PY{p}{,} \PY{n}{linkes}\PY{p}{,} \PY{n}{videos}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}207}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{un\PYZus{}arr}\PY{p}{:}
+              \PY{k}{print}\PY{p}{(}\PY{n}{i}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+              \PY{n}{display}\PY{p}{(}\PY{n}{HTML}\PY{p}{(}\PY{n}{tabulate}\PY{o}{.}\PY{n}{tabulate}\PY{p}{(}\PY{n}{i}\PY{o}{.}\PY{n}{mode}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{tablefmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{html}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{headers}\PY{o}{=}\PY{n}{categorical\PYZus{}columns}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Photo']
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Status']
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Link']
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Video']
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}208}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{arr}\PY{p}{:}
+              \PY{k}{print}\PY{p}{(}\PY{n}{i}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+              \PY{n}{display}\PY{p}{(}\PY{n}{HTML}\PY{p}{(}\PY{n}{tabulate}\PY{o}{.}\PY{n}{tabulate}\PY{p}{(}\PY{n}{static\PYZus{}counted}\PY{p}{(}\PY{n}{i}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{tablefmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{html}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{headers}\PY{o}{=}\PY{n}{numerical\PYZus{}columns}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Photo']
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Status']
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Link']
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Video']
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}209}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{arr}\PY{p}{:}
+              \PY{k}{print}\PY{p}{(}\PY{n}{i}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+              \PY{n}{display}\PY{p}{(}\PY{n}{HTML}\PY{p}{(}\PY{n}{tabulate}\PY{o}{.}\PY{n}{tabulate}\PY{p}{(}\PY{n}{i}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{mode}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{tablefmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{html}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{headers}\PY{o}{=}\PY{n}{numerical\PYZus{}columns}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Photo']
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Status']
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Link']
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Video']
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \subsubsection{самый популярный
+объект}\label{ux441ux430ux43cux44bux439-ux43fux43eux43fux443ux43bux44fux440ux43dux44bux439-ux43eux431ux44aux435ux43aux442}
+
+    \subsection{Самый популярный объект в выборке и
+почему}\label{ux441ux430ux43cux44bux439-ux43fux43eux43fux443ux43bux44fux440ux43dux44bux439-ux43eux431ux44aux435ux43aux442-ux432-ux432ux44bux431ux43eux440ux43aux435-ux438-ux43fux43eux447ux435ux43cux443}
+
+\subsubsection{1.Явный
+вид}\label{ux44fux432ux43dux44bux439-ux432ux438ux434}
+
+\paragraph{Если принимать что события "comment", "like", "share"
+равнозначны для популярности,то можно смотреть только на столбец Total
+interactions}\label{ux435ux441ux43bux438-ux43fux440ux438ux43dux438ux43cux430ux442ux44c-ux447ux442ux43e-ux441ux43eux431ux44bux442ux438ux44f-comment-like-share-ux440ux430ux432ux43dux43eux437ux43dux430ux447ux43dux44b-ux434ux43bux44f-ux43fux43eux43fux443ux43bux44fux440ux43dux43eux441ux442ux438ux442ux43e-ux43cux43eux436ux43dux43e-ux441ux43cux43eux442ux440ux435ux442ux44c-ux442ux43eux43bux44cux43aux43e-ux43dux430-ux441ux442ux43eux43bux431ux435ux446-total-interactions}
+
+\paragraph{Самый популярным постом можно считать пост 244, который имеет
+наибольшее число
+взимодейтсвий}\label{ux441ux430ux43cux44bux439-ux43fux43eux43fux443ux43bux44fux440ux43dux44bux43c-ux43fux43eux441ux442ux43eux43c-ux43cux43eux436ux43dux43e-ux441ux447ux438ux442ux430ux442ux44c-ux43fux43eux441ux442-244-ux43aux43eux442ux43eux440ux44bux439-ux438ux43cux435ux435ux442-ux43dux430ux438ux431ux43eux43bux44cux448ux435ux435-ux447ux438ux441ux43bux43e-ux432ux437ux438ux43cux43eux434ux435ux439ux442ux441ux432ux438ux439}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}210}]:} \PY{n}{The\PYZus{}best}\PY{o}{=}\PY{n}{numerical\PYZus{}columns}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Page total likes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Impressions by people who have liked your Page}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post reach by people who like your Page}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime People who have liked your Page and engaged with your post}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{comment}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{like}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{share}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{The\PYZus{}best}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{The\PYZus{}best}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Interactions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{The\PYZus{}best}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Interactions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}210}]:}      Page total likes   Type  Category  Post Month  Post Weekday  Post Hour  \textbackslash{}
+          244            130791  Photo         2           7             3          5   
+          
+               Paid  Lifetime Post Total Reach  Lifetime Post Total Impressions  \textbackslash{}
+          244  True                     180480                           319133   
+          
+               Lifetime Engaged Users  Lifetime Post Consumers  \textbackslash{}
+          244                    8072                     4010   
+          
+               Lifetime Post Consumptions  \textbackslash{}
+          244                        6242   
+          
+               Lifetime Post Impressions by people who have liked your Page  \textbackslash{}
+          244                                             108752              
+          
+               Lifetime Post reach by people who like your Page  \textbackslash{}
+          244                                             51456   
+          
+               Lifetime People who have liked your Page and engaged with your post  \textbackslash{}
+          244                                               3316                     
+          
+               comment    like  share  Total Interactions  
+          244      372  5172.0  790.0                6334  
+\end{Verbatim}
+            
+    \paragraph{По этим результатам мы также видим, что пост набрал такое
+больше число "лайков" за счет активного продвижения в
+рекламе}\label{ux43fux43e-ux44dux442ux438ux43c-ux440ux435ux437ux443ux43bux44cux442ux430ux442ux430ux43c-ux43cux44b-ux442ux430ux43aux436ux435-ux432ux438ux434ux438ux43c-ux447ux442ux43e-ux43fux43eux441ux442-ux43dux430ux431ux440ux430ux43b-ux442ux430ux43aux43eux435-ux431ux43eux43bux44cux448ux435-ux447ux438ux441ux43bux43e-ux43bux430ux439ux43aux43eux432-ux437ux430-ux441ux447ux435ux442-ux430ux43aux442ux438ux432ux43dux43eux433ux43e-ux43fux440ux43eux434ux432ux438ux436ux435ux43dux438ux44f-ux432-ux440ux435ux43aux43bux430ux43cux435}
+
+\paragraph{Самым популярным в плане лайков вне зависимости от частоты
+показов поста является пост
+87.}\label{ux441ux430ux43cux44bux43c-ux43fux43eux43fux443ux43bux44fux440ux43dux44bux43c-ux432-ux43fux43bux430ux43dux435-ux43bux430ux439ux43aux43eux432-ux432ux43dux435-ux437ux430ux432ux438ux441ux438ux43cux43eux441ux442ux438-ux43eux442-ux447ux430ux441ux442ux43eux442ux44b-ux43fux43eux43aux430ux437ux43eux432-ux43fux43eux441ux442ux430-ux44fux432ux43bux44fux435ux442ux441ux44f-ux43fux43eux441ux442-87.}
+
+\paragraph{Его мы нашли через отношение "Лайков" к числу уникальных
+человек, у которых пост был
+виден}\label{ux435ux433ux43e-ux43cux44b-ux43dux430ux448ux43bux438-ux447ux435ux440ux435ux437-ux43eux442ux43dux43eux448ux435ux43dux438ux435-ux43bux430ux439ux43aux43eux432-ux43a-ux447ux438ux441ux43bux443-ux443ux43dux438ux43aux430ux43bux44cux43dux44bux445-ux447ux435ux43bux43eux432ux435ux43a-ux443-ux43aux43eux442ux43eux440ux44bux445-ux43fux43eux441ux442-ux431ux44bux43b-ux432ux438ux434ux435ux43d}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}211}]:} \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{The\PYZus{}best}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Interactions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{/}\PY{n}{The\PYZus{}best}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Total Reach}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{==}\PY{p}{(}\PY{n}{The\PYZus{}best}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Interactions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{/}\PY{n}{The\PYZus{}best}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Total Reach}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}211}]:}     Page total likes   Type  Category  Post Month  Post Weekday  Post Hour  \textbackslash{}
+          87            137177  Photo         3          11             3         10   
+          
+               Paid  Lifetime Post Total Reach  Lifetime Post Total Impressions  \textbackslash{}
+          87  False                       4012                             7955   
+          
+              Lifetime Engaged Users  Lifetime Post Consumers  \textbackslash{}
+          87                     550                      319   
+          
+              Lifetime Post Consumptions  \textbackslash{}
+          87                         477   
+          
+              Lifetime Post Impressions by people who have liked your Page  \textbackslash{}
+          87                                               4625              
+          
+              Lifetime Post reach by people who like your Page  \textbackslash{}
+          87                                              2218   
+          
+              Lifetime People who have liked your Page and engaged with your post  \textbackslash{}
+          87                                                403                     
+          
+              comment   like  share  Total Interactions  
+          87        3  270.0   38.0                 311  
+\end{Verbatim}
+            
+    \subsubsection{2. Неявно}\label{ux43dux435ux44fux432ux43dux43e}
+
+\paragraph{Если мерить популярность не по числу видимых другим
+пользователям метрикам(лайк, коммент, поделились), а по числу
+взаимодействий(кликов) с постом, то самым популярным является пост
+278}\label{ux435ux441ux43bux438-ux43cux435ux440ux438ux442ux44c-ux43fux43eux43fux443ux43bux44fux440ux43dux43eux441ux442ux44c-ux43dux435-ux43fux43e-ux447ux438ux441ux43bux443-ux432ux438ux434ux438ux43cux44bux445-ux434ux440ux443ux433ux438ux43c-ux43fux43eux43bux44cux437ux43eux432ux430ux442ux435ux43bux44fux43c-ux43cux435ux442ux440ux438ux43aux430ux43cux43bux430ux439ux43a-ux43aux43eux43cux43cux435ux43dux442-ux43fux43eux434ux435ux43bux438ux43bux438ux441ux44c-ux430-ux43fux43e-ux447ux438ux441ux43bux443-ux432ux437ux430ux438ux43cux43eux434ux435ux439ux441ux442ux432ux438ux439ux43aux43bux438ux43aux43eux432-ux441-ux43fux43eux441ux442ux43eux43c-ux442ux43e-ux441ux430ux43cux44bux43c-ux43fux43eux43fux443ux43bux44fux440ux43dux44bux43c-ux44fux432ux43bux44fux435ux442ux441ux44f-ux43fux43eux441ux442-278}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}212}]:} \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{The\PYZus{}best}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Consumptions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{==}\PY{p}{(}\PY{n}{The\PYZus{}best}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Consumptions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}212}]:}      Page total likes   Type  Category  Post Month  Post Weekday  Post Hour  \textbackslash{}
+          278            126345  Photo         1           6             2          9   
+          
+               Paid  Lifetime Post Total Reach  Lifetime Post Total Impressions  \textbackslash{}
+          278  True                       5854                            11854   
+          
+               Lifetime Engaged Users  Lifetime Post Consumers  \textbackslash{}
+          278                    1043                      947   
+          
+               Lifetime Post Consumptions  \textbackslash{}
+          278                       19779   
+          
+               Lifetime Post Impressions by people who have liked your Page  \textbackslash{}
+          278                                               5901              
+          
+               Lifetime Post reach by people who like your Page  \textbackslash{}
+          278                                              2894   
+          
+               Lifetime People who have liked your Page and engaged with your post  \textbackslash{}
+          278                                                583                     
+          
+               comment   like  share  Total Interactions  
+          278       11  202.0    5.0                 218  
+\end{Verbatim}
+            
+    \paragraph{По числу взаимодействий пользователя со страницей самым
+популярным постом является пост 422, где на одного увидевшего пост
+человека приходится около 3,5
+кликов}\label{ux43fux43e-ux447ux438ux441ux43bux443-ux432ux437ux430ux438ux43cux43eux434ux435ux439ux441ux442ux432ux438ux439-ux43fux43eux43bux44cux437ux43eux432ux430ux442ux435ux43bux44f-ux441ux43e-ux441ux442ux440ux430ux43dux438ux446ux435ux439-ux441ux430ux43cux44bux43c-ux43fux43eux43fux443ux43bux44fux440ux43dux44bux43c-ux43fux43eux441ux442ux43eux43c-ux44fux432ux43bux44fux435ux442ux441ux44f-ux43fux43eux441ux442-422-ux433ux434ux435-ux43dux430-ux43eux434ux43dux43eux433ux43e-ux443ux432ux438ux434ux435ux432ux448ux435ux433ux43e-ux43fux43eux441ux442-ux447ux435ux43bux43eux432ux435ux43aux430-ux43fux440ux438ux445ux43eux434ux438ux442ux441ux44f-ux43eux43aux43eux43bux43e-35-ux43aux43bux438ux43aux43eux432}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}213}]:} \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{The\PYZus{}best}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Consumptions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{/}\PY{n}{The\PYZus{}best}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Total Reach}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{==}\PY{p}{(}\PY{n}{The\PYZus{}best}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Consumptions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{/}\PY{n}{The\PYZus{}best}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Total Reach}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}213}]:}      Page total likes   Type  Category  Post Month  Post Weekday  Post Hour  \textbackslash{}
+          422            102112  Photo         1           3             1         19   
+          
+                Paid  Lifetime Post Total Reach  Lifetime Post Total Impressions  \textbackslash{}
+          422  False                        238                              570   
+          
+               Lifetime Engaged Users  Lifetime Post Consumers  \textbackslash{}
+          422                     143                      142   
+          
+               Lifetime Post Consumptions  \textbackslash{}
+          422                         834   
+          
+               Lifetime Post Impressions by people who have liked your Page  \textbackslash{}
+          422                                                567              
+          
+               Lifetime Post reach by people who like your Page  \textbackslash{}
+          422                                               236   
+          
+               Lifetime People who have liked your Page and engaged with your post  \textbackslash{}
+          422                                                 99                     
+          
+               comment  like  share  Total Interactions  
+          422        0   2.0    0.0                   2  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}214}]:} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Consumers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{l+m+mi}{5000}\PY{p}{]}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+          \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}
+          \PY{n}{data}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}214}]:} (493, 19)
+\end{Verbatim}
+            
+    \section{Корреляция}\label{ux43aux43eux440ux440ux435ux43bux44fux446ux438ux44f}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}215}]:} \PY{k}{print}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Consumers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{19}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Lifetime Post Consumers                                                1.000000
+Lifetime Engaged Users                                                 0.954537
+Lifetime People who have liked your Page and engaged with your post    0.917066
+Lifetime Post Consumptions                                             0.622288
+Lifetime Post reach by people who like your Page                       0.606367
+Lifetime Post Total Reach                                              0.495348
+share                                                                  0.427001
+Total Interactions                                                     0.424432
+like                                                                   0.417469
+comment                                                                0.391607
+Lifetime Post Total Impressions                                        0.362817
+Lifetime Post Impressions by people who have liked your Page           0.282010
+Post Month                                                             0.182346
+Page total likes                                                       0.163651
+Post Hour                                                              0.075401
+Paid                                                                   0.055354
+Category                                                               0.019279
+Post Weekday                                                           0.006984
+Name: Lifetime Post Consumers, dtype: float64
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}216}]:} \PY{n}{data}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}216}]:}                                                     Page total likes  \textbackslash{}
+          Page total likes                                            1.000000   
+          Category                                                   -0.089393   
+          Post Month                                                  0.940863   
+          Post Weekday                                               -0.019351   
+          Post Hour                                                  -0.148719   
+          Paid                                                        0.004988   
+          Lifetime Post Total Reach                                  -0.070554   
+          Lifetime Post Total Impressions                            -0.097753   
+          Lifetime Engaged Users                                     -0.110595   
+          Lifetime Post Consumers                                    -0.163651   
+          Lifetime Post Consumptions                                 -0.121257   
+          Lifetime Post Impressions by people who have li{\ldots}         -0.095862   
+          Lifetime Post reach by people who like your Page           -0.058425   
+          Lifetime People who have liked your Page and en{\ldots}          0.023380   
+          comment                                                     0.030709   
+          like                                                        0.052932   
+          share                                                      -0.007921   
+          Total Interactions                                          0.045810   
+          
+                                                              Category  Post Month  \textbackslash{}
+          Page total likes                                   -0.089393    0.940863   
+          Category                                            1.000000   -0.125625   
+          Post Month                                         -0.125625    1.000000   
+          Post Weekday                                       -0.048798    0.002870   
+          Post Hour                                          -0.110165   -0.180475   
+          Paid                                               -0.024383   -0.017943   
+          Lifetime Post Total Reach                          -0.142337   -0.093678   
+          Lifetime Post Total Impressions                    -0.095664   -0.097971   
+          Lifetime Engaged Users                              0.021026   -0.133543   
+          Lifetime Post Consumers                            -0.019279   -0.182346   
+          Lifetime Post Consumptions                         -0.154525   -0.149147   
+          Lifetime Post Impressions by people who have li{\ldots} -0.050352   -0.094560   
+          Lifetime Post reach by people who like your Page   -0.111519   -0.091696   
+          Lifetime People who have liked your Page and en{\ldots}  0.016352   -0.010555   
+          comment                                             0.024747    0.003867   
+          like                                                0.124238    0.024327   
+          share                                               0.148989   -0.025345   
+          Total Interactions                                  0.123657    0.018053   
+          
+                                                              Post Weekday  Post Hour  \textbackslash{}
+          Page total likes                                       -0.019351  -0.148719   
+          Category                                               -0.048798  -0.110165   
+          Post Month                                              0.002870  -0.180475   
+          Post Weekday                                            1.000000   0.039976   
+          Post Hour                                               0.039976   1.000000   
+          Paid                                                    0.011714  -0.063387   
+          Lifetime Post Total Reach                              -0.034280   0.016049   
+          Lifetime Post Total Impressions                        -0.026777   0.017495   
+          Lifetime Engaged Users                                 -0.019829   0.055332   
+          Lifetime Post Consumers                                 0.006984   0.075401   
+          Lifetime Post Consumptions                              0.007010   0.123321   
+          Lifetime Post Impressions by people who have li{\ldots}     -0.044684   0.040058   
+          Lifetime Post reach by people who like your Page       -0.062013   0.058457   
+          Lifetime People who have liked your Page and en{\ldots}      0.001713   0.060172   
+          comment                                                -0.072777   0.008160   
+          like                                                   -0.077848  -0.018635   
+          share                                                  -0.048092  -0.055476   
+          Total Interactions                                     -0.075601  -0.021598   
+          
+                                                                  Paid  \textbackslash{}
+          Page total likes                                    0.004988   
+          Category                                           -0.024383   
+          Post Month                                         -0.017943   
+          Post Weekday                                        0.011714   
+          Post Hour                                          -0.063387   
+          Paid                                                1.000000   
+          Lifetime Post Total Reach                           0.130787   
+          Lifetime Post Total Impressions                     0.054955   
+          Lifetime Engaged Users                              0.081467   
+          Lifetime Post Consumers                             0.055354   
+          Lifetime Post Consumptions                          0.063722   
+          Lifetime Post Impressions by people who have li{\ldots}  0.000337   
+          Lifetime Post reach by people who like your Page    0.099824   
+          Lifetime People who have liked your Page and en{\ldots}  0.035316   
+          comment                                             0.065423   
+          like                                                0.102031   
+          share                                               0.073078   
+          Total Interactions                                  0.098544   
+          
+                                                              Lifetime Post Total Reach  \textbackslash{}
+          Page total likes                                                    -0.070554   
+          Category                                                            -0.142337   
+          Post Month                                                          -0.093678   
+          Post Weekday                                                        -0.034280   
+          Post Hour                                                            0.016049   
+          Paid                                                                 0.130787   
+          Lifetime Post Total Reach                                            1.000000   
+          Lifetime Post Total Impressions                                      0.696027   
+          Lifetime Engaged Users                                               0.593866   
+          Lifetime Post Consumers                                              0.495348   
+          Lifetime Post Consumptions                                           0.284391   
+          Lifetime Post Impressions by people who have li{\ldots}                   0.325916   
+          Lifetime Post reach by people who like your Page                     0.749317   
+          Lifetime People who have liked your Page and en{\ldots}                   0.415309   
+          comment                                                              0.430563   
+          like                                                                 0.551217   
+          share                                                                0.462958   
+          Total Interactions                                                   0.544303   
+          
+                                                              Lifetime Post Total Impressions  \textbackslash{}
+          Page total likes                                                          -0.097753   
+          Category                                                                  -0.095664   
+          Post Month                                                                -0.097971   
+          Post Weekday                                                              -0.026777   
+          Post Hour                                                                  0.017495   
+          Paid                                                                       0.054955   
+          Lifetime Post Total Reach                                                  0.696027   
+          Lifetime Post Total Impressions                                            1.000000   
+          Lifetime Engaged Users                                                     0.411010   
+          Lifetime Post Consumers                                                    0.362817   
+          Lifetime Post Consumptions                                                 0.222566   
+          Lifetime Post Impressions by people who have li{\ldots}                         0.852010   
+          Lifetime Post reach by people who like your Page                           0.652136   
+          Lifetime People who have liked your Page and en{\ldots}                         0.340314   
+          comment                                                                    0.316134   
+          like                                                                       0.344663   
+          share                                                                      0.287143   
+          Total Interactions                                                         0.342689   
+          
+                                                              Lifetime Engaged Users  \textbackslash{}
+          Page total likes                                                 -0.110595   
+          Category                                                          0.021026   
+          Post Month                                                       -0.133543   
+          Post Weekday                                                     -0.019829   
+          Post Hour                                                         0.055332   
+          Paid                                                              0.081467   
+          Lifetime Post Total Reach                                         0.593866   
+          Lifetime Post Total Impressions                                   0.411010   
+          Lifetime Engaged Users                                            1.000000   
+          Lifetime Post Consumers                                           0.954537   
+          Lifetime Post Consumptions                                        0.581828   
+          Lifetime Post Impressions by people who have li{\ldots}                0.311560   
+          Lifetime Post reach by people who like your Page                  0.707524   
+          Lifetime People who have liked your Page and en{\ldots}                0.916499   
+          comment                                                           0.582843   
+          like                                                              0.666486   
+          share                                                             0.633492   
+          Total Interactions                                                0.669846   
+          
+                                                              Lifetime Post Consumers  \textbackslash{}
+          Page total likes                                                  -0.163651   
+          Category                                                          -0.019279   
+          Post Month                                                        -0.182346   
+          Post Weekday                                                       0.006984   
+          Post Hour                                                          0.075401   
+          Paid                                                               0.055354   
+          Lifetime Post Total Reach                                          0.495348   
+          Lifetime Post Total Impressions                                    0.362817   
+          Lifetime Engaged Users                                             0.954537   
+          Lifetime Post Consumers                                            1.000000   
+          Lifetime Post Consumptions                                         0.622288   
+          Lifetime Post Impressions by people who have li{\ldots}                 0.282010   
+          Lifetime Post reach by people who like your Page                   0.606367   
+          Lifetime People who have liked your Page and en{\ldots}                 0.917066   
+          comment                                                            0.391607   
+          like                                                               0.417469   
+          share                                                              0.427001   
+          Total Interactions                                                 0.424432   
+          
+                                                              Lifetime Post Consumptions  \textbackslash{}
+          Page total likes                                                     -0.121257   
+          Category                                                             -0.154525   
+          Post Month                                                           -0.149147   
+          Post Weekday                                                          0.007010   
+          Post Hour                                                             0.123321   
+          Paid                                                                  0.063722   
+          Lifetime Post Total Reach                                             0.284391   
+          Lifetime Post Total Impressions                                       0.222566   
+          Lifetime Engaged Users                                                0.581828   
+          Lifetime Post Consumers                                               0.622288   
+          Lifetime Post Consumptions                                            1.000000   
+          Lifetime Post Impressions by people who have li{\ldots}                    0.178172   
+          Lifetime Post reach by people who like your Page                      0.366250   
+          Lifetime People who have liked your Page and en{\ldots}                    0.571440   
+          comment                                                               0.264831   
+          like                                                                  0.240224   
+          share                                                                 0.212711   
+          Total Interactions                                                    0.242733   
+          
+                                                              Lifetime Post Impressions by people who have liked your Page  \textbackslash{}
+          Page total likes                                                                            -0.095862              
+          Category                                                                                    -0.050352              
+          Post Month                                                                                  -0.094560              
+          Post Weekday                                                                                -0.044684              
+          Post Hour                                                                                    0.040058              
+          Paid                                                                                         0.000337              
+          Lifetime Post Total Reach                                                                    0.325916              
+          Lifetime Post Total Impressions                                                              0.852010              
+          Lifetime Engaged Users                                                                       0.311560              
+          Lifetime Post Consumers                                                                      0.282010              
+          Lifetime Post Consumptions                                                                   0.178172              
+          Lifetime Post Impressions by people who have li{\ldots}                                           1.000000              
+          Lifetime Post reach by people who like your Page                                             0.584851              
+          Lifetime People who have liked your Page and en{\ldots}                                           0.328690              
+          comment                                                                                      0.241848              
+          like                                                                                         0.252348              
+          share                                                                                        0.188835              
+          Total Interactions                                                                           0.249084              
+          
+                                                              Lifetime Post reach by people who like your Page  \textbackslash{}
+          Page total likes                                                                           -0.058425   
+          Category                                                                                   -0.111519   
+          Post Month                                                                                 -0.091696   
+          Post Weekday                                                                               -0.062013   
+          Post Hour                                                                                   0.058457   
+          Paid                                                                                        0.099824   
+          Lifetime Post Total Reach                                                                   0.749317   
+          Lifetime Post Total Impressions                                                             0.652136   
+          Lifetime Engaged Users                                                                      0.707524   
+          Lifetime Post Consumers                                                                     0.606367   
+          Lifetime Post Consumptions                                                                  0.366250   
+          Lifetime Post Impressions by people who have li{\ldots}                                          0.584851   
+          Lifetime Post reach by people who like your Page                                            1.000000   
+          Lifetime People who have liked your Page and en{\ldots}                                          0.672254   
+          comment                                                                                     0.468041   
+          like                                                                                        0.628831   
+          share                                                                                       0.484754   
+          Total Interactions                                                                          0.614796   
+          
+                                                              Lifetime People who have liked your Page and engaged with your post  \textbackslash{}
+          Page total likes                                                                             0.023380                     
+          Category                                                                                     0.016352                     
+          Post Month                                                                                  -0.010555                     
+          Post Weekday                                                                                 0.001713                     
+          Post Hour                                                                                    0.060172                     
+          Paid                                                                                         0.035316                     
+          Lifetime Post Total Reach                                                                    0.415309                     
+          Lifetime Post Total Impressions                                                              0.340314                     
+          Lifetime Engaged Users                                                                       0.916499                     
+          Lifetime Post Consumers                                                                      0.917066                     
+          Lifetime Post Consumptions                                                                   0.571440                     
+          Lifetime Post Impressions by people who have li{\ldots}                                           0.328690                     
+          Lifetime Post reach by people who like your Page                                             0.672254                     
+          Lifetime People who have liked your Page and en{\ldots}                                           1.000000                     
+          comment                                                                                      0.426743                     
+          like                                                                                         0.504198                     
+          share                                                                                        0.455646                     
+          Total Interactions                                                                           0.503309                     
+          
+                                                               comment      like  \textbackslash{}
+          Page total likes                                    0.030709  0.052932   
+          Category                                            0.024747  0.124238   
+          Post Month                                          0.003867  0.024327   
+          Post Weekday                                       -0.072777 -0.077848   
+          Post Hour                                           0.008160 -0.018635   
+          Paid                                                0.065423  0.102031   
+          Lifetime Post Total Reach                           0.430563  0.551217   
+          Lifetime Post Total Impressions                     0.316134  0.344663   
+          Lifetime Engaged Users                              0.582843  0.666486   
+          Lifetime Post Consumers                             0.391607  0.417469   
+          Lifetime Post Consumptions                          0.264831  0.240224   
+          Lifetime Post Impressions by people who have li{\ldots}  0.241848  0.252348   
+          Lifetime Post reach by people who like your Page    0.468041  0.628831   
+          Lifetime People who have liked your Page and en{\ldots}  0.426743  0.504198   
+          comment                                             1.000000  0.836154   
+          like                                                0.836154  1.000000   
+          share                                               0.868314  0.903828   
+          Total Interactions                                  0.863564  0.997682   
+          
+                                                                 share  \textbackslash{}
+          Page total likes                                   -0.007921   
+          Category                                            0.148989   
+          Post Month                                         -0.025345   
+          Post Weekday                                       -0.048092   
+          Post Hour                                          -0.055476   
+          Paid                                                0.073078   
+          Lifetime Post Total Reach                           0.462958   
+          Lifetime Post Total Impressions                     0.287143   
+          Lifetime Engaged Users                              0.633492   
+          Lifetime Post Consumers                             0.427001   
+          Lifetime Post Consumptions                          0.212711   
+          Lifetime Post Impressions by people who have li{\ldots}  0.188835   
+          Lifetime Post reach by people who like your Page    0.484754   
+          Lifetime People who have liked your Page and en{\ldots}  0.455646   
+          comment                                             0.868314   
+          like                                                0.903828   
+          share                                               1.000000   
+          Total Interactions                                  0.928503   
+          
+                                                              Total Interactions  
+          Page total likes                                              0.045810  
+          Category                                                      0.123657  
+          Post Month                                                    0.018053  
+          Post Weekday                                                 -0.075601  
+          Post Hour                                                    -0.021598  
+          Paid                                                          0.098544  
+          Lifetime Post Total Reach                                     0.544303  
+          Lifetime Post Total Impressions                               0.342689  
+          Lifetime Engaged Users                                        0.669846  
+          Lifetime Post Consumers                                       0.424432  
+          Lifetime Post Consumptions                                    0.242733  
+          Lifetime Post Impressions by people who have li{\ldots}            0.249084  
+          Lifetime Post reach by people who like your Page              0.614796  
+          Lifetime People who have liked your Page and en{\ldots}            0.503309  
+          comment                                                       0.863564  
+          like                                                          0.997682  
+          share                                                         0.928503  
+          Total Interactions                                            1.000000  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}217}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}217}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1aabd080>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}218}]:} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Page total likes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Category}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Post Month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Post Weekday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Post Hour}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Paid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Total Impressions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Impressions by people who have liked your Page}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{comment}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{like}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{share}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Interactions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,} \PY{n}{fmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.3f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}218}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x359f9dd8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}219}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Consumers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime People who have liked your Page and engaged with your post}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}219}]:} <matplotlib.collections.PathCollection at 0x38aa2898>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Гистограмма}\label{ux433ux438ux441ux442ux43eux433ux440ux430ux43cux43cux430}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}220}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)} 
+          \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Consumers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Program Files (x86)\textbackslash{}Microsoft Visual Studio\textbackslash{}Shared\textbackslash{}Anaconda3\_64\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}axes\textbackslash{}\_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
+  warnings.warn("The 'normed' kwarg is deprecated, and has been "
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}220}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x38aa2e80>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Jointplot - комбинация гистограмм и диаграмм
+рассеивания}\label{jointplot---ux43aux43eux43cux431ux438ux43dux430ux446ux438ux44f-ux433ux438ux441ux442ux43eux433ux440ux430ux43cux43c-ux438-ux434ux438ux430ux433ux440ux430ux43cux43c-ux440ux430ux441ux441ux435ux438ux432ux430ux43dux438ux44f}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}221}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{jointplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Consumers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Engaged Users}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Program Files (x86)\textbackslash{}Microsoft Visual Studio\textbackslash{}Shared\textbackslash{}Anaconda3\_64\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}axes\textbackslash{}\_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
+  warnings.warn("The 'normed' kwarg is deprecated, and has been "
+C:\textbackslash{}Program Files (x86)\textbackslash{}Microsoft Visual Studio\textbackslash{}Shared\textbackslash{}Anaconda3\_64\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}axes\textbackslash{}\_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
+  warnings.warn("The 'normed' kwarg is deprecated, and has been "
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}221}]:} <seaborn.axisgrid.JointGrid at 0x36116908>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}222}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{jointplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Consumers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime People who have liked your Page and engaged with your post}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{,} \PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Program Files (x86)\textbackslash{}Microsoft Visual Studio\textbackslash{}Shared\textbackslash{}Anaconda3\_64\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}axes\textbackslash{}\_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
+  warnings.warn("The 'normed' kwarg is deprecated, and has been "
+C:\textbackslash{}Program Files (x86)\textbackslash{}Microsoft Visual Studio\textbackslash{}Shared\textbackslash{}Anaconda3\_64\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}axes\textbackslash{}\_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
+  warnings.warn("The 'normed' kwarg is deprecated, and has been "
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}222}]:} <seaborn.axisgrid.JointGrid at 0x301777b8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}223}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{jointplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Consumers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Consumptions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{,} \PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kde}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}223}]:} <seaborn.axisgrid.JointGrid at 0x361207f0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Парные
+диаграммы}\label{ux43fux430ux440ux43dux44bux435-ux434ux438ux430ux433ux440ux430ux43cux43cux44b}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}224}]:} \PY{n}{cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Consumers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Engaged Users}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Consumptions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Total Reach}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{pairplot}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}224}]:} <seaborn.axisgrid.PairGrid at 0x1d15dba8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Ящик с
+усами}\label{ux44fux449ux438ux43a-ux441-ux443ux441ux430ux43cux438}
+
+Отображает одномерное распределение вероятности
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}225}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post reach by people who like your Page}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}225}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x38b18518>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}226}]:} \PY{c+c1}{\PYZsh{} Распределение параметра Page total likes сгруппированные по Type.}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Consumers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}226}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x377a7828>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}227}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Total Reach}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}227}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x37040978>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    где 1-action(акция), 2-product(товар), 3-inspiration(неявная связь с
+брендом)
+
+    \section{Violin plot}\label{violin-plot}
+
+Похоже на предыдущую диаграмму, но по краям отображаются распределения
+плотности
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}228}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{violinplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Consumers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}228}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x385c0b70>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}231}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{violinplot}\PY{p}{(}\PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Consumers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Consumers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Program Files (x86)\textbackslash{}Microsoft Visual Studio\textbackslash{}Shared\textbackslash{}Anaconda3\_64\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}axes\textbackslash{}\_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
+  warnings.warn("The 'normed' kwarg is deprecated, and has been "
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}231}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x21370f28>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}232}]:} \PY{c+c1}{\PYZsh{} Распределение параметра Page total likes сгруппированные по Type.}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{violinplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lifetime Post Consumers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}232}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1d36c4e0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_46_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
